@@ -1,0 +1,31 @@
+/* Custom Styles */
+
+body {
+    padding-top: 56px; /* Space for the fixed navbar */
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.jumbotron {
+    margin-top: 30px;
+    background-color: #f8f9fa;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+h1, h2 {
+    color: #343a40;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.btn {
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Add any additional custom styles as needed */

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Input Data{% endblock %}
+
+{% block content %}
+<h2>Input Data for Prediction</h2>
+<form method="post" action="/input">
+    <div class="form-group">
+        <label for="data">Data</label>
+        <input type="text" class="form-control" id="data" name="data" placeholder="Enter your data">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
