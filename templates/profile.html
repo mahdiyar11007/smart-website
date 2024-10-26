@@ -6,9 +6,22 @@
 <h2>Profile</h2>
 <p>Welcome, {{ user.username }}</p>
 <h3>Previous Predictions</h3>
-<ul>
+{% if predictions %}
+<table border="1">
+    <tr>
+        <th>Timestamp</th>
+        <th>Input Data</th>
+        <th>Prediction Result</th>
+    </tr>
     {% for prediction in predictions %}
-        <li>{{ prediction }}</li>
+    <tr>
+        <td>{{ prediction.timestamp.strftime('%Y-%m-%d --- %H:%M') }}</td>
+        <td>{{ prediction.input_data }}</td>
+        <td>{{ prediction.prediction_result }}</td>
+    </tr>
     {% endfor %}
-</ul>
+</table>
+{% else %}
+<p>No predictions found.</p>
+{% endif %}
 {% endblock %}
