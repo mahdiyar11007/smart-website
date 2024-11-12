@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from datetime import datetime
+from model import predict  # Importing the predict function from model.py
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
@@ -29,6 +30,7 @@ class PredictionHistory(db.Model):
 with app.app_context():
     db.create_all()
 
+# Decorator to enforce login requirement
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -82,13 +84,29 @@ def login():
 @login_required
 def input_data():
     if request.method == 'POST':
-        data = request.form.get('data')
-        result = f"Prediction result for data '{data}'"
+        # Collecting features from the form
+        features = [
+            float(request.form['age']),
+            float(request.form['sex']),
+            float(request.form['cp']),
+            float(request.form['trestbps']),
+            float(request.form['chol']),
+            float(request.form['fbs']),
+            float(request.form['restecg']),
+            float(request.form['thalach']),
+            float(request.form['exang']),
+            float(request.form['oldpeak']),
+            float(request.form['slope']),
+            float(request.form['ca']),
+            float(request.form['thal'])
+        ]
         
+        result = predict(features)
+
         prediction = PredictionHistory(
             user_id=session['user_id'],
-            input_data=data,
-            prediction_result=result
+            input_data=str(features),
+            prediction_result=str(result)
         )
         db.session.add(prediction)
         db.session.commit()
