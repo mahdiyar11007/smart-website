@@ -80,5 +80,5 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/filoger-smart-website:latest
             docker stop filoger-smart-website || true
             docker rm filoger-smart-website || true
-            docker run -d --name filoger-smart-website -p 80:5000 ${{ secrets.DOCKER_USERNAME }}/filoger-smart-website:latest
+            docker run -d --name filoger-smart-website -p 8080:5000 ${{ secrets.DOCKER_USERNAME }}/filoger-smart-website:latest
 
